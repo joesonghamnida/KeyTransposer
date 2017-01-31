@@ -110,27 +110,28 @@ public class Main {
             boolean firstNote = n.equals(transposedScale.get(0));
             if (firstNote) {
                 revisedScale.add(n);
-            }
-            else{
-                String[] steps = n.split("/");
-                boolean skip = false;
-                for (String s : steps) {
-
-                    if (n.contains("b") && isFlat && !skip) {
-                        note = steps[1];
-                        skip = true;
-                    }else if(skip){
-                        break;
-                    } else {
-                        note = steps[0];
-                        skip = true;
+            } else {
+                if (n.length() != 1) {
+                    String[] steps = n.split("/");
+                    boolean skip = false;
+                    for (String s : steps) {
+                        if (n.contains("b") && isFlat && !skip) {
+                            note = steps[1];
+                            skip = true;
+                        } else if (!skip) {
+                            note = steps[1];
+                        }
                     }
-                    revisedScale.add(note);
+                } else {
+                    note = n;
                 }
+                revisedScale.add(note);
             }
+
         }
         return revisedScale;
     }
+
 
     public static Boolean isKeyFlat(String key) {
         boolean isFlat = false;
