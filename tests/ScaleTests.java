@@ -15,59 +15,87 @@ public class ScaleTests {
 
     @Before
     public void loadNotes() {
-        notes.add("Ab");
         notes.add("A");
-        notes.add("A#");
-        notes.add("Bb");
+        notes.add("A#/Bb");
         notes.add("B");
         notes.add("C");
-        notes.add("C#");
-        notes.add("Db");
+        notes.add("C#/Db");
         notes.add("D");
-        notes.add("D#");
-        notes.add("Eb");
+        notes.add("D#/Eb");
         notes.add("E");
         notes.add("F");
-        notes.add("F#");
-        notes.add("Gb");
+        notes.add("F#/Gb");
         notes.add("G");
-        notes.add("G#");
+        notes.add("G#/Ab");
     }
 
     @Test
     public void AMajorIonian() {
+        loadNotes();
         String[] expectedScale = {"A", "B", "C#", "D", "E", "F#", "G"};
-        testScales(expectedScale, "A");
+        testIonianScales(expectedScale, "A");
     }
 
     @Test
-    public void BbMajorIonain(){
+    public void BflatMajorIonian(){
+        loadNotes();
         String[] expectedScale = {"Bb", "C", "D", "Eb", "F", "G", "A"};
-        testScales(expectedScale, "Bb");
+        testIonianScales(expectedScale, "Bb");
     }
 
     @Test
     public void BMajorIonian(){
+        loadNotes();
         String[] expectedScale = {"B", "C#", "D#", "E", "F#", "G#","A#"};
-        testScales(expectedScale, "B");
+        testIonianScales(expectedScale, "B");
     }
 
     @Test
     public void CMajorIonian(){
+        loadNotes();
         String[] expectedScale = {"C", "D", "E", "F", "G", "A", "B"};
-        testScales(expectedScale, "C");
+        testIonianScales(expectedScale, "C");
+    }
+
+    @Test
+    public void CSharpMajorIonian(){
+        //TODO: figure out what to do with this
+        //loadNotes();
+        //String[] ExpectedScale = {"C#", "D#", "E#", "F#", "G#/Ab","A#/Bb", "B#"};
+    }
+
+    @Test
+    public void DflatMajorIonian(){
+        String[] expectedScale = {"Db", "Eb", "F", "Gb", "Ab", "Bb"};
+        testIonianScales(expectedScale, "Db");
     }
 
     @Test
     public void DMajorIonian() {
+        loadNotes();
         String[] expectedScale = {"D", "E", "F#", "G", "A", "B", "C#"};
-        testScales(expectedScale, "D");
+        testIonianScales(expectedScale, "D");
     }
 
-    public static void testScales(String[] expectedScale, String key){
+    @Test
+    public void EFlatMajorIonian(){
+        loadNotes();
+        String[] expectedScale = {"Eb", "F", "G", "Ab", "Bb", "C", "D"};
+        testIonianScales(expectedScale, "Eb");
+    }
+
+    @Test
+    public void EMajorIonian(){
+        loadNotes();
+        String[] expectedScale = {"E", "F#", "G#", "A", "B", "C#", "D#"};
+        testIonianScales(expectedScale, "E");
+    }
+
+    public static void testIonianScales(String[] expectedScale, String key){
         ArrayList<String> actualScale = Main.IonianScaleTransposition(key, notes);
+        System.out.println("Key: "+key);
         for (int i = 0; i < expectedScale.length; i++) {
-            System.out.printf("Exepcted: %s Actual: %s\n", expectedScale[i], actualScale.get(i));
+            System.out.printf("Expected: %s Actual: %s\n", expectedScale[i], actualScale.get(i));
             Assert.assertTrue(expectedScale[i].equals(actualScale.get(i)));
         }
     }
