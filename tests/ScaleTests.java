@@ -61,7 +61,7 @@ public class ScaleTests {
     public void CSharpMajorIonian() {
         //TODO: figure out what to do with this
         //loadNotes();
-        //String[] ExpectedScale = {"C#", "D#", "E#", "F#", "G#/Ab","A#/Bb", "B#"};
+        //String[] ExpectedScale = {"C#", "D#", "E#", "F#", "G#","A#", "B#"};
     }
 
     @Test
@@ -92,10 +92,61 @@ public class ScaleTests {
     }
 
     public static void testIonianScales(String[] expectedScale, String key) {
-        ArrayList<String> actualScale = Main.IonianScaleTransposition(key, notes);
+        ArrayList<String> actualScale = ScaleTransposition.IonianScaleTransposition(key, notes);
+        System.out.println("Ionian");
         System.out.println("Key: " + key);
         for (int i = 0; i < expectedScale.length; i++) {
-            System.out.printf("Expected: %s Actual: %s\n", expectedScale[i], actualScale.get(i));
+            //System.out.printf("Expected: %s Actual: %s\n", expectedScale[i], actualScale.get(i));
+            Assert.assertTrue(expectedScale[i].equals(actualScale.get(i)));
+        }
+    }
+
+    @Test
+    public void AMinorAeolian(){
+        loadNotes();
+        String[] expectedScale = {"A", "B", "C", "D", "E", "F", "G"};
+        testAeolianScales(expectedScale, "A");
+    }
+
+    @Test
+    public void BflatMinorAeolian(){
+        loadNotes();
+        String[] expectedScale = {"Bb", "C", "Db", "Eb", "F", "Gb", "Ab"};
+        testAeolianScales(expectedScale, "Bb");
+    }
+
+    @Test
+    public void BMinorAeolian(){
+        loadNotes();
+        String[] expectedScale = {"B", "C#", "D", "E", "F#", "G", "A"};
+        testAeolianScales(expectedScale, "B");
+    }
+
+    @Test
+    public void CMinorAeolian(){
+        loadNotes();
+        String[] expectedScale = {"C", "D", "Eb", "F", "G", "Ab", "Bb"};
+        testAeolianScales(expectedScale, "C");
+    }
+
+    @Test
+    public void DflatMinorAeolian(){
+        loadNotes();
+        String[] expectedScale = {"Db", "Eb", "F", "Gb", "Ab", "A", "B"};
+    }
+
+    @Test
+    public void DMinorAeolian(){
+        loadNotes();
+        String[] expectedScale = {"D", "E", "F", "G", "A", "Bb", "C"};
+    }
+
+    public static void testAeolianScales(String[] expectedScale, String key) {
+        ArrayList<String> actualScale = ScaleTransposition.AeolianScaleTransposition(key, notes);
+        System.out.println("Aeolian");
+        System.out.println("Key: " + key);
+        for (int i = 0; i < expectedScale.length; i++) {
+            //System.out.printf("Expected: %s Actual: %s\n", expectedScale[i], actualScale.get(i));
             Assert.assertTrue(expectedScale[i].equals(actualScale.get(i)));
         }
     }
