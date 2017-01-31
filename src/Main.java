@@ -12,15 +12,25 @@ public class Main {
         System.out.println("Key Transposition Program");
 
         loadNotes();
-        System.out.println(notes.size());
+
+        String selection = majorMinorSelectionMenu();
+
         String currentKey = "";
+        ArrayList<String> transposedScale = new ArrayList<>();
         System.out.println("Enter the key you want: ");
         String selectedKey = scanner.nextLine().trim();
-        ArrayList<String> transposedScale = IonianScaleTransposition(selectedKey, notes);
+
+        if (selection.equals("1")) {
+            transposedScale = ScaleTransposition.IonianScaleTransposition(selectedKey, notes);
+        } else {
+            transposedScale = ScaleTransposition.AeolianScaleTransposition(selectedKey, notes);
+        }
+
         for (String note : transposedScale) {
             System.out.println(note);
         }
     }
+    
 
     public static String majorMinorSelectionMenu() {
         String selection = "";
@@ -32,6 +42,7 @@ public class Main {
         validInput.add("5");
         validInput.add("6");
         validInput.add("7");
+        validInput.add("8");
 
         do {
             System.out.println("Select a scale: ");
@@ -42,111 +53,10 @@ public class Main {
             System.out.println("5. Mixolydian: Major");
             System.out.println("6. Aeolian: Minor");
             System.out.println("7. Locrian: Minor");
+            System.out.println("8. Exit");
             selection = scanner.nextLine();
         } while (!validInput.contains(selection));
         return selection;
-    }
-
-    public static ArrayList<String> IonianScaleTransposition(String key, ArrayList<String> notes) {
-
-        loadNotes();
-
-        ArrayList<String> transposedScale = new ArrayList<>();
-        int rootNumber = setRootIndex(key);
-        String rootNote = setRootNote(key);
-
-        transposedScale.add(rootNote);
-        transposedScale.add(notes.get((rootNumber + 2) % 12));
-        transposedScale.add(notes.get((rootNumber + 4) % 12));
-        transposedScale.add(notes.get((rootNumber + 5) % 12));
-        transposedScale.add(notes.get((rootNumber + 7) % 12));
-        transposedScale.add(notes.get((rootNumber + 9) % 12));
-
-        if (key.equals("A")) {
-            transposedScale.add(notes.get((rootNumber + 10) % 12));
-        } else {
-            transposedScale.add(notes.get((rootNumber + 11) % 12));
-        }
-
-        boolean isKeyFlat = isKeyFlat(key);
-        transposedScale = purgeSharpOrFlatNotes(isKeyFlat, transposedScale);
-
-        return transposedScale;
-    }
-
-    public static Integer setRootIndex(String key) {
-        int root = 0;
-
-        for (String note : notes) {
-            String[] steps = note.split("/");
-            for (String s : steps) {
-                if (s.equals(key)) {
-                    root = notes.indexOf(note);
-                }
-            }
-        }
-        return root;
-    }
-
-    public static String setRootNote(String key) {
-        String rootNote = "";
-        for (String note : notes) {
-            String[] steps = note.split("/");
-            for (String s : steps) {
-                if (s.equals(key)) {
-                    rootNote = s;
-                }
-            }
-        }
-        return rootNote;
-    }
-
-    public static ArrayList<String> purgeSharpOrFlatNotes(Boolean isFlat, ArrayList<String> transposedScale) {
-        ArrayList<String> revisedScale = new ArrayList<>();
-
-        String note = "";
-
-        for (String n : transposedScale) {
-            boolean firstNote = n.equals(transposedScale.get(0));
-            if (firstNote) {
-                revisedScale.add(n);
-            } else if (!n.contains("/")) {
-                revisedScale.add(n);
-            } else {
-                boolean skip = false;
-                String[] steps = n.split("/");
-
-                for (String s : steps) {
-                    if (n.contains("b") && isFlat && !skip) {
-                        note = steps[1];
-                        skip = true;
-                    } else if (!skip) {
-                        note = steps[0];
-                    }
-                }
-                revisedScale.add(note);
-            }
-        }
-        return revisedScale;
-    }
-
-
-    public static Boolean isKeyFlat(String key) {
-        boolean isFlat = false;
-
-        if (key.contains("b")) {
-            isFlat = true;
-        }
-        return isFlat;
-    }
-
-    public static Boolean isKeySharp(String key) {
-        boolean isSharp = false;
-
-        if (key.charAt(1) == '#' || key.length() == 1) {
-            isSharp = true;
-        }
-        return isSharp;
     }
 
     public static void loadNotes() {
