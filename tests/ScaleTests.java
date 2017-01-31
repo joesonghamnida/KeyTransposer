@@ -37,35 +37,35 @@ public class ScaleTests {
     }
 
     @Test
-    public void BflatMajorIonian(){
+    public void BflatMajorIonian() {
         loadNotes();
         String[] expectedScale = {"Bb", "C", "D", "Eb", "F", "G", "A"};
         testIonianScales(expectedScale, "Bb");
     }
 
     @Test
-    public void BMajorIonian(){
+    public void BMajorIonian() {
         loadNotes();
-        String[] expectedScale = {"B", "C#", "D#", "E", "F#", "G#","A#"};
+        String[] expectedScale = {"B", "C#", "D#", "E", "F#", "G#", "A#"};
         testIonianScales(expectedScale, "B");
     }
 
     @Test
-    public void CMajorIonian(){
+    public void CMajorIonian() {
         loadNotes();
         String[] expectedScale = {"C", "D", "E", "F", "G", "A", "B"};
         testIonianScales(expectedScale, "C");
     }
 
     @Test
-    public void CSharpMajorIonian(){
+    public void CSharpMajorIonian() {
         //TODO: figure out what to do with this
         //loadNotes();
         //String[] ExpectedScale = {"C#", "D#", "E#", "F#", "G#/Ab","A#/Bb", "B#"};
     }
 
     @Test
-    public void DflatMajorIonian(){
+    public void DflatMajorIonian() {
         String[] expectedScale = {"Db", "Eb", "F", "Gb", "Ab", "Bb"};
         testIonianScales(expectedScale, "Db");
     }
@@ -78,22 +78,22 @@ public class ScaleTests {
     }
 
     @Test
-    public void EFlatMajorIonian(){
+    public void EFlatMajorIonian() {
         loadNotes();
         String[] expectedScale = {"Eb", "F", "G", "Ab", "Bb", "C", "D"};
         testIonianScales(expectedScale, "Eb");
     }
 
     @Test
-    public void EMajorIonian(){
+    public void EMajorIonian() {
         loadNotes();
         String[] expectedScale = {"E", "F#", "G#", "A", "B", "C#", "D#"};
         testIonianScales(expectedScale, "E");
     }
 
-    public static void testIonianScales(String[] expectedScale, String key){
+    public static void testIonianScales(String[] expectedScale, String key) {
         ArrayList<String> actualScale = Main.IonianScaleTransposition(key, notes);
-        System.out.println("Key: "+key);
+        System.out.println("Key: " + key);
         for (int i = 0; i < expectedScale.length; i++) {
             System.out.printf("Expected: %s Actual: %s\n", expectedScale[i], actualScale.get(i));
             Assert.assertTrue(expectedScale[i].equals(actualScale.get(i)));
