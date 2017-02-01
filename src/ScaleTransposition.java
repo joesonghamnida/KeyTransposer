@@ -7,8 +7,6 @@ public class ScaleTransposition {
 
     public static ArrayList<String> IonianScaleTransposition(String key, ArrayList<String> notes) {
 
-        Main.loadNotes();
-
         ArrayList<String> transposedScale = new ArrayList<>();
         int rootNumber = setRootIndex(key, notes);
         String rootNote = setRootNote(key, notes);
@@ -32,8 +30,31 @@ public class ScaleTransposition {
         return transposedScale;
     }
 
+    public static ArrayList<String> DorianScaleTransposition(){
+        ArrayList<String> transposedScale = new ArrayList<>();
+
+        return transposedScale;
+    }
+
+    public static ArrayList<String> PhyrigianScaleTransposition(){
+        ArrayList<String> transposedScale = new ArrayList<>();
+
+        return transposedScale;
+    }
+
+    public static ArrayList<String> LydianScaleTransposition(){
+        ArrayList<String> transposedScale = new ArrayList<>();
+
+        return transposedScale;
+    }
+
+    public static ArrayList<String> MixolydianScaleTransposition(){
+        ArrayList<String> transposedScale = new ArrayList<>();
+
+        return transposedScale;
+    }
+
     public static ArrayList<String> AeolianScaleTransposition(String key, ArrayList<String> notes){
-        Main.loadNotes();
 
         ArrayList<String> transposedScale = new ArrayList<>();
         int rootNumber = setRootIndex(key, notes);
@@ -45,7 +66,6 @@ public class ScaleTransposition {
         transposedScale.add(notes.get((rootNumber + 5) % 12));
         transposedScale.add(notes.get((rootNumber + 7) % 12));
         transposedScale.add(notes.get((rootNumber + 8) % 12));
-
         transposedScale.add(notes.get((rootNumber + 10) % 12));
 
         boolean isKeyFlat = isKeyFlat(key);
@@ -55,6 +75,12 @@ public class ScaleTransposition {
         }
 
         transposedScale = purgeSharpOrFlatNotes(isKeyFlat, transposedScale);
+
+        return transposedScale;
+    }
+
+    public static ArrayList<String> LocrianScaleTransposition(){
+        ArrayList<String> transposedScale = new ArrayList<>();
 
         return transposedScale;
     }
